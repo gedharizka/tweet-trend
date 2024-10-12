@@ -1,12 +1,15 @@
 pipeline {
+
     agent {
         node {
             label 'maven'
         }
     }
+
     environment {
         PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
     }
+
     stages {
         stage("Clone Code"){
             steps {
@@ -14,9 +17,7 @@ pipeline {
             }
         }
 
-    }
-    stages {
-        stage("build"){
+         stage("build"){
             steps {
                 sh 'mvn clean deploy'
             }
@@ -31,7 +32,7 @@ pipeline {
             steps {
 
                 withSonarQubeEnv('sonar-scanner-server'){
-                  sh "${sonarScan}/bin/sonar-scanner"
+                    sh "${sonarScan}/bin/sonar-scanner"
                 }
 
             }
@@ -40,7 +41,5 @@ pipeline {
 
 
 
-
-
-    }
+    }    
 }

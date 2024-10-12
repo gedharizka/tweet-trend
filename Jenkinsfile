@@ -22,5 +22,27 @@ environment {
             }
         }
 
+        stage("SonarQube scan"){
+
+            environment{
+                sonarScan = tool 'sonar-scanncer';
+            }
+
+            steps {
+
+                withSonarQubeEnv('sonar-scanner-server'){
+                    sh """
+                        ${sonarScan}/bin/sonar-scanner 
+                    """
+                }
+
+            }
+
+        }
+
+
+
+
+
     }
 }

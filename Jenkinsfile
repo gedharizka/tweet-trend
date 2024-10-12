@@ -25,6 +25,11 @@ pipeline {
 
         stage("SonarQube scan"){
 
+            tools {
+                jdk "JDK-21"
+            }
+
+
             environment{
                 sonarScan = tool 'sonar-scanncer';
             }

@@ -4,9 +4,9 @@ pipeline {
             label 'maven'
         }
     }
-environment {
-    PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
-}
+    environment {
+        PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
+    }
     stages {
         stage("Clone Code"){
             steps {
@@ -31,9 +31,7 @@ environment {
             steps {
 
                 withSonarQubeEnv('sonar-scanner-server'){
-                    sh """
-                        ${sonarScan}/bin/sonar-scanner 
-                    """
+                  sh "${sonarScan}/bin/sonar-scanner"
                 }
 
             }

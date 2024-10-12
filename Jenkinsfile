@@ -36,9 +36,11 @@ pipeline {
 
             steps {
 
-                withSonarQubeEnv('sonar-scanner-server'){
-                    sh "${sonarScan}/bin/sonar-scanner"
-                }
+                sh "java -version"
+
+                // withSonarQubeEnv('sonar-scanner-server'){
+                //     sh "${sonarScan}/bin/sonar-scanner"
+                // }
 
             }
 

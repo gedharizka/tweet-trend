@@ -17,9 +17,15 @@ pipeline {
             }
         }
 
-         stage("build"){
+        stage("build"){
             steps {
                 sh 'mvn clean deploy'
+            }
+        }
+
+        stage("build"){
+            steps {
+                sh 'mvn surefire-report:report'
             }
         }
 
@@ -54,6 +60,8 @@ pipeline {
             }
 
         }
+
+        
 
 
 

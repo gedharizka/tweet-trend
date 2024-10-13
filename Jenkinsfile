@@ -71,17 +71,18 @@ pipeline {
             }
 
             steps {
-
-                echo"----------- Quality Gate ----------"
-                timeout(time:1, unit:'HOURS'){
-                    def qg = waitForQualityGate()
-                    if(qg.status != "OK"){
-                        error "Pipeline aborted due to quality gate failur: ${qg.status}"
+                script{
+                    echo"----------- Quality Gate ----------"
+                    timeout(time:1, unit:'HOURS'){
+                        def qg = waitForQualityGate()
+                        if(qg.status != "OK"){
+                            error "Pipeline aborted due to quality gate failur: ${qg.status}"
+                        }
                     }
-                }
+                    
+                    echo"----------- Quality Gate End ----------"
                 
-                echo"----------- Quality Gate End ----------"
-
+                }
             }
 
         }

@@ -64,6 +64,27 @@ pipeline {
             }
 
         }
+        stage("Quality Gate"){
+
+            environment{
+                sonarScan = tool 'sonar-scanncer';
+            }
+
+            steps {
+
+                echo"----------- Quality Gate ----------"
+                timeout(time:1, unit:'HOURS'){
+                    def qg = waitForQualityGate()
+                    if(qg.status != "OK"){
+                        error "Pipeline aborted due to quality gate failur: ${qg.status}"
+                    }
+                }
+                
+                echo"----------- Quality Gate End ----------"
+
+            }
+
+        }
 
         
 

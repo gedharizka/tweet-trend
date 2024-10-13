@@ -25,11 +25,6 @@ pipeline {
 
         stage("SonarQube scan"){
 
-            tools {
-                jdk "JDK-21"
-            }
-
-
             environment{
                 sonarScan = tool 'sonar-scanncer';
             }
@@ -37,9 +32,23 @@ pipeline {
             steps {
 
                 sh "java -version"
+                
+                echo"----------- Halo ----------"
 
+                withSonarQubeEnv('sonar-scanner-server'){
+                    withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
+                        sh """
+                            mvn clean verify sonar:sonar \
+                            -Dsonar.projectKey=trend-app \
+                            -Dsonar.projectName=trend-app \
+                            -Dsonar.host.url=http://178.128.84.214:9002 \
+                            -Dsonar.login=${SONAR_TOKEN}
+                        """
+                    }
+                }
+                
                 // withSonarQubeEnv('sonar-scanner-server'){
-                //     sh "${sonarScan}/bin/sonar-scanner"
+                //    sh "${sonarScan}/bin/sonar-scanner"
                 // }
 
             }

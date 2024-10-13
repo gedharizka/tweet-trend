@@ -23,9 +23,9 @@ pipeline {
             }
         }
 
-        stage("build"){
+        stage("Test"){
             steps {
-                sh 'mvn surefire-report:report'
+                sh """ mvn surefire-report:report """
             }
         }
 

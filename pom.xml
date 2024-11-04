@@ -117,9 +117,15 @@
 
 	<distributionManagement>
 		<repository>
-			<id>artifactory</id> <!-- ID ini harus sama dengan ID di settings.xml -->
-			<url>https://gedha.jfrog.io/artifactory/gedha-libs-release/</url>
+			<id>central</id>
+			<name>a0vmvlisivy4o-artifactory-primary-0-releases</name>
+			<url>https://gedha.jfrog.io/artifactory/gedha-libs-release</url>
 		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>a0vmvlisivy4o-artifactory-primary-0-snapshots</name>
+			<url>https://gedha.jfrog.io/artifactory/gedha-libs-snapshot</url>
+		</snapshotRepository>
 	</distributionManagement>
 
 

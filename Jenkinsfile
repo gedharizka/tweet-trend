@@ -89,7 +89,8 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'maven-jfrog	', variable: 'MAVEN_SETTINGS')]) {
                     sh "mvn clean deploy -s $MAVEN_SETTINGS -DskipTests"
-                }   
+                }
+            }
         }  
 
         

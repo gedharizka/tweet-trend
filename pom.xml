@@ -117,13 +117,6 @@
 
 	<distributionManagement>
 		<repository>
-			<id>dev</id>
-			<url>file://jarstaging</url>
-		</repository>
-	</distributionManagement>
-
-	<distributionManagement>
-		<repository>
 			<id>artifactory</id> <!-- ID ini harus sama dengan ID di settings.xml -->
 			<url>https://gedha.jfrog.io/artifactory/gedha-libs-release/</url>
 		</repository>

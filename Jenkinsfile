@@ -33,13 +33,13 @@ pipeline {
                                                   usernameVariable: 'USERNAME', 
                                                   passwordVariable: 'PASSWORD')]) {
                     // Update settings.xml dengan username dan password dari credential
+                   configFileProvider([configFile(fileId: 'maven-jfrog	', variable: 'SETTINGS_XML')]){
                     sh """
-                    sed -i 's#\\${security.getCurrentUsername()}#$USERNAME#g' $SETTINGS_XML
-                    sed -i 's#\\${security.getEscapedEncryptedPassword()!"*** Insert encrypted password here ***"}#$PASSWORD#g' $SETTINGS_XML
-                    """
-                    
-                    // Lanjutkan dengan build Maven menggunakan file settings.xml yang diperbarui
-                    sh 'mvn clean install -s $SETTINGS_XML'
+                        sed -i 's/\\${USERNAME}/$USERNAME/g' $SETTINGS_XML
+                        sed -i 's/\\${PASSWORD}/$PASSWORD/g' $SETTINGS_XML
+                        mvn clean install -s $SETTINGS_XML
+                        """
+                   }
                 }
             }
         }

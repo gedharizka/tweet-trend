@@ -19,11 +19,28 @@ pipeline {
             }
         }
 
+        // stage("build"){
+        //     steps {
+        //         echo " ===> Build started <==="
+        //         sh 'mvn clean deploy -Dmaven.test.skip=true'
+        //         echo " ===> Build end <==="
+        //     }
+        // }
+
         stage("build"){
             steps {
-                echo " ===> Build started <==="
-                sh 'mvn clean deploy -Dmaven.test.skip=true'
-                echo " ===> Build end <==="
+                 withCredentials([usernamePassword(credentialsId: 'jfrog-cred', 
+                                                  usernameVariable: 'USERNAME', 
+                                                  passwordVariable: 'PASSWORD')]) {
+                    // Update settings.xml dengan username dan password dari credential
+                    sh """
+                    sed -i 's#\\${security.getCurrentUsername()}#$USERNAME#g' $SETTINGS_XML
+                    sed -i 's#\\${security.getEscapedEncryptedPassword()!"*** Insert encrypted password here ***"}#$PASSWORD#g' $SETTINGS_XML
+                    """
+                    
+                    // Lanjutkan dengan build Maven menggunakan file settings.xml yang diperbarui
+                    sh 'mvn clean install -s $SETTINGS_XML'
+                }
             }
         }
 

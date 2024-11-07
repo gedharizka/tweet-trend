@@ -115,7 +115,7 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
+	<!-- <distributionManagement>
 		<repository>
 			<id>central</id>
 			<name>a0vmvlisivy4o-artifactory-primary-0-releases</name>
@@ -126,7 +126,7 @@
 			<name>a0vmvlisivy4o-artifactory-primary-0-snapshots</name>
 			<url>https://gedha.jfrog.io/artifactory/gedha-libs-snapshot</url>
 		</snapshotRepository>
-	</distributionManagement>
+	</distributionManagement> -->
 
 
 </project>

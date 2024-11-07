@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.valaxy</groupId>
 	<artifactId>demo-workshop</artifactId>
-	<version>2.1.2</version>
+	<version>2.1.4</version>
 	<name>demo-workshop</name>
 	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
@@ -115,18 +115,12 @@
 		</plugins>
 	</build>
 
-	<!-- <distributionManagement>
+	<distributionManagement>
 		<repository>
-			<id>central</id>
-			<name>a0vmvlisivy4o-artifactory-primary-0-releases</name>
-			<url>https://gedha.jfrog.io/artifactory/gedha-libs-release</url>
+			<id>dev</id>
+			<url>file://jarstaging</url>
 		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<name>a0vmvlisivy4o-artifactory-primary-0-snapshots</name>
-			<url>https://gedha.jfrog.io/artifactory/gedha-libs-snapshot</url>
-		</snapshotRepository>
-	</distributionManagement> -->
+	</distributionManagement>
 
 
 </project>

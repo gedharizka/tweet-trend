@@ -1,5 +1,3 @@
- def registry = 'https://gedha.jfrog.io/'
-
 pipeline {
 
     agent {
@@ -19,28 +17,11 @@ pipeline {
             }
         }
 
-        // stage("build"){
-        //     steps {
-        //         echo " ===> Build started <==="
-        //         sh 'mvn clean deploy -Dmaven.test.skip=true'
-        //         echo " ===> Build end <==="
-        //     }
-        // }
-
         stage("build"){
             steps {
-                 withCredentials([usernamePassword(credentialsId: 'jfrog-cred', 
-                                                  usernameVariable: 'USERNAME', 
-                                                  passwordVariable: 'PASSWORD')]) {
-                    // Update settings.xml dengan username dan password dari credential
-                   configFileProvider([configFile(fileId: 'maven-jfrog	', variable: 'SETTINGS_XML')]){
-                    sh """
-                        sed -i 's/\\${USERNAME}/$USERNAME/g' $SETTINGS_XML
-                        sed -i 's/\\${PASSWORD}/$PASSWORD/g' $SETTINGS_XML
-                        mvn clean install -s $SETTINGS_XML
-                        """
-                   }
-                }
+                echo " ===> Build started <==="
+                sh 'mvn clean deploy -Dmaven.test.skip=true'
+                echo " ===> Build end <==="
             }
         }
 
@@ -101,14 +82,6 @@ pipeline {
             }
 
         }
-
-        stage("Jar Publish") {
-            steps {
-                configFileProvider([configFile(fileId: 'maven-jfrog	', variable: 'MAVEN_SETTINGS')]) {
-                    sh "mvn clean deploy -s $MAVEN_SETTINGS -DskipTests"
-                }
-            }
-        }  
 
         
 
